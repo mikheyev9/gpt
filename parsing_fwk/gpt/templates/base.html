@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}<title>Main page</title> {% endblock %}
+    {% block js %} {% endblock %}
+    <style>
+        /* Стили для шапки */
+        header {
+            background-color: grey; /* серый фон */
+            padding: 10px; /* небольшой отступ внутри шапки */
+            color: white; /* белый цвет текста */
+        }
+        header nav ul {
+            list-style-type: none; /* убрать маркеры списка */
+            padding: 0; /* убрать внутренние отступы */
+        }
+        header nav ul li {
+            display: inline; /* отобразить элементы списка в строку */
+            margin-right: 10px; /* небольшой отступ справа от элемента списка */
+        }
+        header nav ul li a {
+            color: white; /* белый цвет ссылок */
+            text-decoration: none; /* убрать подчёркивание ссылок */
+        }
+        
+    </style>
+    {% block css %} {% endblock %}
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'gpt:main' %}">Главная</a></li>
+                <!-- Другие ссылки на вашем сайте -->
+            </ul>
+        </nav>
+    </header>
+    {% block content %} {% endblock %}
+</body>
+</html>

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <p>Выберите один из следующих разделов:</p>
+    <ul>
+        <li><a href="{% url 'gpt:site_selection' %}">Рерайтинг текста на 1 сайте</a></li>
+    </ul>
+</div>
+{% endblock %}

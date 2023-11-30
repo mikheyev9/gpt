@@ -1,0 +1,29 @@
+
+{% extends 'base.html' %}
+
+{% block title %} <title>Выбор событий</title> {% endblock %}
+
+{% block js %}
+    <script>
+        function toggle(source) {
+            checkboxes = document.getElementsByName('event');
+            for(var i=0, n=checkboxes.length;i<n;i++) {
+                checkboxes[i].checked = source.checked;
+            }
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+    <form method="post" action="{% url 'gpt:process_selection' %}">
+        {% csrf_token %}
+        <input type="hidden" name="site_id" value="{{ site_id }}">
+        <input type="checkbox" onClick="toggle(this)" /> Выбрать все<br/>
+        {% for event in events %}
+            <div>
+                <input type="checkbox" name="event" value="{{ event.id }}"> {{ event.name }}
+            </div>
+        {% endfor %}
+        <button type="submit">Отправить</button>
+    </form>
+{% endblock %}

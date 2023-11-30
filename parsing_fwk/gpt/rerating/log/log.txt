@@ -1,0 +1,17 @@
+2023-11-30 08:38:48,246 - asyncio - DEBUG - Using selector: EpollSelector
+2023-11-30 08:38:48,250 - root - DEBUG - Logging initialized at level 10
+2023-11-30 08:38:48,250 - root - DEBUG - Logging initialized at level 10
+2023-11-30 08:38:48,252 - root - DEBUG - Initialization complete.
+2023-11-30 08:38:48,252 - root - DEBUG - Initialization complete.
+2023-11-30 08:38:48,253 - root - DEBUG - File opened. Entering main loop
+2023-11-30 08:38:48,253 - root - DEBUG - File opened. Entering main loop
+2023-11-30 08:38:48,255 - root - DEBUG - Reading request 0: APIRequest(task_id=0, request_json={'model': 'gpt-3.5-turbo', 'messages': [{'role': 'system', 'content': 'cделай рерайтинг текста,Title:Салават Юлаев - Лада,Genre:КХЛ'}, {'role': 'user', 'content': 'Матч между «Салават Юлаев» и «Лада», который состоится на арене в Уфе, может быть перенесен. Во время игры на льду каждая команда продемонстрирует свое мастерство и умение в хоккейных навыках. Участники соревнования будут показывать ускорение и замедление, делать прыжки, осуществлять передачи, бороться с ловкостью и использовать изощренные тактики, чтобы превзойти соперников. Заполнившие стадион желающие лицезреть этот поединок смогут почувствовать атмосферу и настроение такого соревнования в хоккее. Зрителям обещаны потрясающие и экстравагантные ощущения.'}], 'temperature': 1, 'top_p': 1, 'frequency_penalty': 0.5, 'presence_penalty': 0.5}, token_consumption=319, attempts_left=3, metadata=None, proxy='http://bG6oa7:2KMzZM@163.198.212.98:8000', event_id='Салават Юлаев - Лада', result=[])
+2023-11-30 08:38:48,255 - root - DEBUG - Reading request 0: APIRequest(task_id=0, request_json={'model': 'gpt-3.5-turbo', 'messages': [{'role': 'system', 'content': 'cделай рерайтинг текста,Title:Салават Юлаев - Лада,Genre:КХЛ'}, {'role': 'user', 'content': 'Матч между «Салават Юлаев» и «Лада», который состоится на арене в Уфе, может быть перенесен. Во время игры на льду каждая команда продемонстрирует свое мастерство и умение в хоккейных навыках. Участники соревнования будут показывать ускорение и замедление, делать прыжки, осуществлять передачи, бороться с ловкостью и использовать изощренные тактики, чтобы превзойти соперников. Заполнившие стадион желающие лицезреть этот поединок смогут почувствовать атмосферу и настроение такого соревнования в хоккее. Зрителям обещаны потрясающие и экстравагантные ощущения.'}], 'temperature': 1, 'top_p': 1, 'frequency_penalty': 0.5, 'presence_penalty': 0.5}, token_consumption=319, attempts_left=3, metadata=None, proxy='http://bG6oa7:2KMzZM@163.198.212.98:8000', event_id='Салават Юлаев - Лада', result=[])
+2023-11-30 08:38:48,256 - root - INFO - Starting request #0
+2023-11-30 08:38:48,256 - root - INFO - Starting request #0
+2023-11-30 08:38:49,257 - root - DEBUG - Read file exhausted
+2023-11-30 08:38:49,257 - root - DEBUG - Read file exhausted
+2023-11-30 08:39:26,255 - root - DEBUG - Request 0 saved to /home/anton/study/GPT/parsing_fwk/gpt/rerating/filesarena-ufa_ru_gpt.jsonl
+2023-11-30 08:39:26,255 - root - DEBUG - Request 0 saved to /home/anton/study/GPT/parsing_fwk/gpt/rerating/filesarena-ufa_ru_gpt.jsonl
+2023-11-30 08:39:26,299 - root - INFO - Parallel processing complete. Results saved to /home/anton/study/GPT/parsing_fwk/gpt/rerating/filesarena-ufa_ru_gpt.jsonl
+2023-11-30 08:39:26,299 - root - INFO - Parallel processing complete. Results saved to /home/anton/study/GPT/parsing_fwk/gpt/rerating/filesarena-ufa_ru_gpt.jsonl
