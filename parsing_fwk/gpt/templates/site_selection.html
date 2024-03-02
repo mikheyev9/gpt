@@ -2,17 +2,112 @@
 
 {% block title %}<title>Select Site</title>{% endblock %}
 
+{% block js %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const siteFromInput = document.getElementById('siteFromInput');
+        const siteToInput = document.getElementById('siteToInput');
+        const siteFromSelect = document.getElementById('siteFrom');
+        const siteToSelect = document.getElementById('siteTo');
+
+        function filterOptions(input, select) {
+            const filter = input.value.toUpperCase();
+            const options = select.options;
+
+            for (let i = 0; i < options.length; i++) {
+                const txtValue = options[i].textContent || options[i].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    options[i].style.display = "";
+                } else {
+                    options[i].style.display = "none";
+                }
+            }
+        }
+
+        siteFromInput.addEventListener('input', () => {
+            filterOptions(siteFromInput, siteFromSelect);
+        });
+
+        siteToInput.addEventListener('input', () => {
+            filterOptions(siteToInput, siteToSelect);
+        });
+    });
+</script>
+{% endblock %}
+
+{% block css %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .container {
+        text-align: center;
+        margin-bottom: 40px; /* Увеличенное пространство между формами */
+        padding: 20px;
+        border: 1px solid #ddd; /* Граница для контейнера */
+        border-radius: 10px;
+        background-color: #f9f9f9; /* Светлый фон для контейнера */
+    }
+    .form {
+        margin: 10px;
+    }
+    .select-menu, .submit-button, .form input[type="number"], .form input[type="text"] {
+        font-size: 16px;
+        padding: 5px 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .submit-button {
+        cursor: pointer;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+    }
+    .select-menu {
+        width: 200px;
+    }
+    label {
+        color: #00008B; /* Темно-синий цвет для названий полей */
+        font-weight: bold;
+    }
+    .description {
+        color: #6A5ACD; /* Сиреневый цвет для описаний */
+        margin-bottom: 5px;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-<body>
-    <form method="post">
+<div class="container">
+    <form method="post" class="form" action="{% url 'gpt:site_selection' %}">
         {% csrf_token %}
-        <select name="site">
+
+        <h2 class="heading">Выбор сайта</h2>
+        <label for="site_from">Копируем с:</label>
+        <input type="text" id="siteFromInput" placeholder="Поиск...">
+        <select name="site_from" id="siteFrom" class="select-menu">
+            <option value="" disabled selected hidden>Выберите сайт...</option>
             {% for site in sites %}
                 <option value="{{ site.id }}">{{ site.name }}</option>
             {% endfor %}
         </select>
-        <button type="submit">Выбрать</button>
+
+        <label for="site_to">Копируем на:</label>
+        <input type="text" id="siteToInput" placeholder="Поиск...">
+        <select name="site_to" id="siteTo" class="select-menu">
+            <option value="" disabled selected hidden>Выберите сайт...</option>
+            {% for site in sites %}
+                <option value="{{ site.id }}">{{ site.name }}</option>
+            {% endfor %}
+        </select>  
+        <button type="submit" class="submit-button">Отправить</button>
     </form>
-</body>
-</html>
+</div>
 {% endblock %}

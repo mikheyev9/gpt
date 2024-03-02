@@ -76,12 +76,12 @@ WSGI_APPLICATION = 'parsing_fwk.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'crmdb',  
-        'USER': 'django_project', 
-        'PASSWORD': 'C8iIb38QJjo', 
-        'HOST': '80.76.42.37', 
-        'PORT': '5432',  
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'crmdb',
+        'USER': 'django_project',
+        'PASSWORD': 'Q8kPzqBPk4fb6I',
+        'HOST': '193.178.170.180',
+        'PORT': '5432',
     }
 }
 

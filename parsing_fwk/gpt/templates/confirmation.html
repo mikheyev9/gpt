@@ -31,9 +31,10 @@
                 .catch(error => console.error('Error:', error));
         }
     
-        
-        // Вызывать функцию каждые 5 секунд
-        setInterval(fetchLogData, 5000);
+        // Вызываем функцию fetchLogData с задержкой в 5 секунд после загрузки страницы
+        setTimeout(fetchLogData, 5000);
+        // Затем устанавливаем интервал в 20 секунд для последующих вызовов
+        setInterval(fetchLogData, 20000);
     </script>
 {% endblock %}
 
@@ -47,19 +48,7 @@
 
 {% block content %}
     <div id="log" style="height: 400px; overflow-y: scroll; background-color: #f4f4f4; padding: 10px; border: 1px solid #ddd; font-family: monospace;"></div>
-
-
-    <h1>Выбранные события</h1>
-    <ul>
-        {% for event in events %}
-            <li>
-                <strong>Название:</strong> {{ event.name }}<br>
-                <strong>Описание:</strong> {{ event.about }}<br>
-                <strong>Жанр:</strong> {{ event.genre }}<br>
-                <strong>Сайт:</strong> {{ event.site__name }}
-            </li>
-        {% empty %}
-            <li>События не найдены.</li>
-        {% endfor %}
+    <p>Общее количество событий: {{ events_len }}</p>
+  
     </ul>
 {% endblock %}

@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block title %} <title>Настройка GPT</title> {% endblock %}
+
+{% block content %}
+     <!-- Форма настроек запроса к GPT -->
+<form method="post" class="form" action="{% url 'gpt:process_selection' %}">
+    {% csrf_token %}
+
+    <!-- Выбор API ключа -->
+    <label for="api_key">API ключ:</label>
+    <select name="api_key" id="api_key">
+        {% for key in api_keys %}
+        <option value="{{ key }}">{{ key }}</option>
+        {% endfor %}
+    </select>
+    <br><br>
+
+    <!-- Выбор прокси-сервера -->
+    <label for="proxy">Proxy:</label>
+    <select name="proxy" id="proxy">
+        {% for proxy in proxies %}
+        <option value="{{ proxy }}">{{ proxy }}</option>
+        {% endfor %}
+    </select>
+    <br><br>
+
+    <!-- Выбор модели -->
+    <label for="model">Выберите модель:</label>
+    <select name="model" id="model">
+        {% for model in models %}
+            <option value="{{ model }}" {% if model == "gpt-3.5-turbo" %}selected{% endif %}>{{ model }}</option>
+        {% endfor %}
+    </select>
+    <div>Модель, которая будет использоваться для генерации текста.</div>
+    <br>
+
+    <!-- Ввод текста указаний-->
+    <label for="content">Текст:</label>
+    <input type="text" id="content" name="content" value="сделай рерайтинг текста">
+    <div>Указания для GPT</div>
+    <br>
+
+    <!-- Настройка Temperature -->
+    <label for="temperature">Temperature (0-2):</label>
+    <input type="number" id="temperature" name="temperature" step="0.1" min="0" max="2" value="1">
+    <div>Определяет степень творческой свободы ответов. Высокая температура приводит к более творческим ответам.</div>
+    <br>
+
+    <!-- Настройка Top P -->
+    <label for="top_p">Top P (0-1):</label>
+    <input type="number" id="top_p" name="top_p" step="0.1" min="0" max="1" value="1">
+    <div>Управляет разнообразием ответов, путем установки порога для вероятности следующих слов.</div>
+    <br>
+
+    <!-- Настройка Frequency Penalty -->
+    <label for="frequency_penalty">Frequency Penalty:</label>
+    <input type="number" id="frequency_penalty" name="frequency_penalty" step="0.1" min="0" max="1" value="1">
+    <div>Уменьшает повторение слов и фраз в ответе.</div>
+    <br>
+
+    <!-- Настройка Presence Penalty -->
+    <label for="presence_penalty">Presence Penalty:</label>
+    <input type="number" id="presence_penalty" name="presence_penalty" step="0.1" min="0" max="1" value="1">
+    <div>Уменьшает вероятность повторения уже упомянутых идей или тем.</div>
+    <br>
+
+    <!-- Максимальное количество запросов в минуту -->
+    <label for="max_requests_per_minute">Max Requests per Minute:</label>
+    <input type="number" id="max_requests_per_minute" name="max_requests_per_minute" min="2" max="300" value="2">
+    <span class="tooltip">Максимальное количество запросов к API в минуту. Допустимые значения от 2 до 300.</span>
+    <br><br>
+
+    <!-- Максимальное количество токенов в минуту -->
+    <label for="max_tokens_per_minute">Max Tokens per Minute:</label>
+    <input type="number" id="max_tokens_per_minute" name="max_tokens_per_minute" min="20000" max="300000" value="20000">
+    <span class="tooltip">Лимит количества токенов, которые можно использовать в минуту. Диапазон от 20000 до 300000.</span>
+    <br><br>
+
+    <!-- Количество попыток повторного запроса -->
+    <label for="max_attempts">Max Attempts:</label>
+    <input type="number" id="max_attempts" name="max_attempts" min="1" value="3">
+    <span class="tooltip">Количество попыток повторного выполнения запроса в случае ошибки, прежде чем считать запрос неудачным.</span>
+    <br><br>
+
+    <!-- Уровень логирования -->
+    <label for="logging_level">Logging Level:</label>
+    <select name="logging_level" id="logging_level">
+        <option value="10" selected>10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+        <option value="40">40</option>
+    </select>
+    <span class="tooltip">Уровень детализации логирования. Более низкие значения соответствуют более подробному логированию.</span>
+    <br><br>
+
+    <button type="submit">Отправить</button>
+
+{% endblock %}

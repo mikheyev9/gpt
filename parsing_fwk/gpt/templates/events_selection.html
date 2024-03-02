@@ -1,29 +1,60 @@
-
 {% extends 'base.html' %}
 
 {% block title %} <title>Выбор событий</title> {% endblock %}
 
+{% block css %}
+<style>
+    .about-text {
+        max-height: 100px; /* Ограничение высоты блока */
+        overflow-y: hidden; /* Скрытие вертикальной прокрутки */
+        margin-bottom: 10px;
+        padding: 5px;
+        border: 1px solid #ccc; /* Небольшое оформление границы */
+        border-radius: 5px; /* Скругление углов */
+        background-color: #f9f9f9; /* Цвет фона */
+    }
+</style>
+{% endblock %}
+
 {% block js %}
-    <script>
-        function toggle(source) {
-            checkboxes = document.getElementsByName('event');
-            for(var i=0, n=checkboxes.length;i<n;i++) {
-                checkboxes[i].checked = source.checked;
-            }
+<script>
+    function toggle(source) {
+        checkboxes = document.getElementsByName('event');
+        for (var i = 0, n = checkboxes.length; i < n; i++) {
+            checkboxes[i].checked = source.checked;
         }
-    </script>
+    }
+
+    function toggleAbout(button) {
+        const aboutText = button.previousElementSibling;
+        if (aboutText.style.maxHeight) {
+            aboutText.style.maxHeight = null;
+            button.textContent = "Показать больше";
+        } else {
+            aboutText.style.maxHeight = "none";
+            button.textContent = "Скрыть";
+        }
+    }
+</script>
 {% endblock %}
 
 {% block content %}
-    <form method="post" action="{% url 'gpt:process_selection' %}">
-        {% csrf_token %}
-        <input type="hidden" name="site_id" value="{{ site_id }}">
-        <input type="checkbox" onClick="toggle(this)" /> Выбрать все<br/>
-        {% for event in events %}
-            <div>
-                <input type="checkbox" name="event" value="{{ event.id }}"> {{ event.name }}
-            </div>
-        {% endfor %}
-        <button type="submit">Отправить</button>
-    </form>
+<form method="post" action="{% url 'gpt:gpt_options' %}">
+    {% csrf_token %}
+    <input type="hidden" name="site_id_from" value="{{ site_id_from }}">
+    <input type="hidden" name="site_id_to" value="{{ site_id_to }}">
+    <input type="checkbox" onClick="toggle(this)" /> Выбрать все<br/>
+    {% for event in events_from %}
+    <div>
+        <input type="checkbox" name="event" value="{{ event.id }}"> 
+        <b>ID:</b> {{ event.id }}, <b>Name:</b> {{ event.name }}, <b>Event date:</b> <em>{{ event.date }}</em><br>
+        <!-- Текст about с возможностью раскрытия -->
+        <div class="about-text">
+            <b>About:</b> {{ event.about|safe }} <!-- Используйте |safe, чтобы интерпретировать HTML-разметку -->
+        </div>
+        <button type="button" class="show-more-button" onclick="toggleAbout(this)">Показать больше</button>
+
+    {% endfor %}
+    <button type="submit">Отправить</button>
+</form>
 {% endblock %}
